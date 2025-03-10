@@ -50,6 +50,8 @@ namespace Biblioteka.mvvm.viewmodel
         public CommandVM AddBook { get; set; }
         public CommandVM Login { get; set; }
         public CommandVM BooksView { get; set; }
+        public CommandVM LogOut { get; set; }
+        public CommandVM DeleteAccount { get; set; }
 
 
         public MainPageVM()
@@ -70,6 +72,24 @@ namespace Biblioteka.mvvm.viewmodel
             BooksView = new CommandVM(async () =>
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new BooksPage());
+            });
+            LogOut = new CommandVM(async () =>
+            {
+                if (connect.CurrentUser != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Выйти", $"Вы выйдете из текущего аккаунта {connect.CurrentUser.Username}", "OK");
+                    connect.CurrentUser = null;
+                }
+            });
+
+            DeleteAccount = new CommandVM(async () =>
+            {
+                if (connect.CurrentUser != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Удалить", $"Вы удалите текущий аккаунт {connect.CurrentUser.Username}", "OK");
+                    await connect.RemoveUserByIdAsync(connect.CurrentUser.Id);
+                    connect.CurrentUser = null;
+                }
             });
         }
 

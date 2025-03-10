@@ -5,8 +5,10 @@
     <StackLayout Padding="20">
         <Label Text="Главная страница" FontSize="24" HorizontalOptions="Center"/>
         <Button Text="Добавить книгу" Command="{Binding AddBook}"/>
-        <Button Text="Регистрация" Command="{Binding Login}"/>
+        <Button Text="Войти" Command="{Binding Login}"/>
         <Button Text="Книги" Command="{Binding BooksView}"/>
+        <Button Text="Выйти" Command="{Binding LogOut}"/>
+        <Button Text="Удалить аккаунт" Command="{Binding DeleteAccount}"/>
         <!-- CollectionView - Для всех книг -->
         <CollectionView ItemsSource="{Binding Books}" SelectionMode="Single" SelectedItem="{Binding SelectedBook}">
             <CollectionView.ItemTemplate>
