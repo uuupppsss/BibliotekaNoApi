@@ -1,4 +1,5 @@
 ﻿using Biblioteka.mvvm.model;
+using Biblioteka.mvvm.view;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,22 +49,27 @@ namespace Biblioteka.mvvm.viewmodel
 
         public CommandVM AddBook { get; set; }
         public CommandVM Login { get; set; }
+        public CommandVM BooksView { get; set; }
 
 
         public MainPageVM()
         {
-            Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
             connect = FakeDB.Instance;
             connect.BooksListChanged += LoadBooks;
             LoadBooks();
             AddBook = new CommandVM(async () =>
             {
-                await Shell.Current.GoToAsync("AddBookPage");
+                await Application.Current.MainPage.Navigation.PushAsync(new AddBookPage());
             });
 
             Login=new CommandVM(async () =>
             {
-                await Shell.Current.GoToAsync("LoginPage");
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            });
+
+            BooksView = new CommandVM(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new BooksPage());
             });
         }
 

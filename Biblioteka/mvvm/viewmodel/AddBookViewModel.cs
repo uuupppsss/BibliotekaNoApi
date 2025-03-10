@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Biblioteka.mvvm.viewmodel
 {
-    [QueryProperty(nameof(UpdatingBookId), "UpdatingBookId")]
     public class AddBookViewModel :BaseVM
     {
         private MessagesServise messagesServise;
@@ -79,7 +78,7 @@ namespace Biblioteka.mvvm.viewmodel
             }
         }
 
-        public int UpdatingBookId { get;set; }
+        public int UpdatingBookId { get; set; } = 0;
 
         public CommandVM SaveBookCommand { get; }
 
@@ -92,6 +91,7 @@ namespace Biblioteka.mvvm.viewmodel
 
         private async void SaveBook()
         {
+            if(connect.SelectedBook!=null) UpdatingBookId = connect.SelectedBook.Id;
             if (UpdatingBookId == 0)
             {
                 if (!string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Author))

@@ -1,4 +1,5 @@
 ﻿using Biblioteka.mvvm.model;
+using Biblioteka.mvvm.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Biblioteka.mvvm.viewmodel
 
             RegisterCommand = new CommandVM(async () =>
             {
-                await Shell.Current.GoToAsync("RegisterPage");
+                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
             });
 
             LoginCommand = new CommandVM(async () =>

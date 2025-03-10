@@ -50,15 +50,12 @@ namespace Biblioteka.mvvm.viewmodel
         }
 		private async void ViewDetails()
 		{
-            //передача данных в BookDetailPage
+            //передача данных в BookDetailPage через бд
             if (SelectedBook != null)
             {
-                var navigationParameter = new ShellNavigationQueryParameters
-                {
-                    { "SelectedBook", SelectedBook }
-                };
-                SelectedBook = null;
-                await Shell.Current.GoToAsync("BookDetailPage", navigationParameter);
+                connect.SelectedBook = SelectedBook;
+				SelectedBook = null;
+                await Application.Current.MainPage.Navigation.PushAsync(new BookDetailPage());
             }
         }
 

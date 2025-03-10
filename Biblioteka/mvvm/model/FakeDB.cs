@@ -20,6 +20,7 @@ namespace Biblioteka.mvvm.model
                 return instance;
             }
         }
+        public Book SelectedBook { get; set; }
         public User CurrentUser { get; set; }
         public Action BooksListChanged;
         private List<User> _users;
